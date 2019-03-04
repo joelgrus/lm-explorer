@@ -28,11 +28,13 @@
         const Title = styled.h1`
             font-size: 1.5em;
             text-align: right;
-            color: palevioletred;
+            color: #2085bc;
             background: url('static/ai2-logo-header.png');
             background-repeat: no-repeat;
             background-size: 360px 71px;
             height: 71px;
+            line-height: 71px;
+            padding: 5px;
         `
 
         const Intro = styled.div`
@@ -45,13 +47,12 @@
             padding: 10px 10px 10px;
         `
 
-        const Footer = styled.div`
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            border: 1px solid #efefef;
-            padding: 10px 10px 10px;
+        const InputOutput = styled.div`
+            display: flex;
+        `
+
+        const Inputs = styled.div`
+            padding: 10px;
         `
 
         const TextInput = styled.input`
@@ -84,14 +85,34 @@
         const OutputSentence = styled.div`
             margin: 20px;
             font-family: monospace;
+            flex: 1;
         `
 
         const OutputToken = styled.span`
             cursor: pointer;
+
         `
+
+        const VR = styled.div`
+            border-left: 1px solid lightgray;
+            margin: 10px;
+            height: 200px;
+        `
+
+
 
         const OutputSpace = styled.span`
         `
+
+        const Footer = styled.div`
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            border: 1px solid #efefef;
+            padding: 10px 10px 10px;
+        `
+
 
         class App extends React.Component {
 
@@ -185,16 +206,22 @@
                             </IntroParagraph>
                         </Intro>
 
-                        <TextInput type="text"
-                                   value={this.state.output}
-                                   onChange={this.setOutput}
-                                   onKeyDown={this.state.output ? this.runOnEnter : null}/>
+                        <InputOutput>
+                            <Inputs>
+                                <TextInput type="text"
+                                        value={this.state.output}
+                                        onChange={this.setOutput}
+                                        onKeyDown={this.state.output ? this.runOnEnter : null}/>
 
-                        <Button onClick={() => this.choose()}>predict</Button>
+                                <Button onClick={() => this.choose()}>predict</Button>
 
-                        <Choices choose={this.choose} logits={this.state.logits} words={this.state.words} probabilities={this.state.probabilities}/>
+                                <Choices choose={this.choose} logits={this.state.logits} words={this.state.words} probabilities={this.state.probabilities}/>
+                            </Inputs>
 
-                        <Output text={this.state.output} predict={this.predict}/>
+                            <VR/>
+
+                            <Output text={this.state.output} predict={this.predict}/>
+                        </InputOutput>
 
                         <Footer>
                             Built at the <a href="https://allenai.org">Allen Institute for Artificial Intelligence</a> using Hugging Face's <a href="https://github.com/huggingface/pytorch-pretrained-BERT">pytorch-pretrained-BERT</a> library.
