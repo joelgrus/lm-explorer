@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" href="/static/favicon.ico">
     <title>LM Explorer (alpha)</title>
     <style>
@@ -31,9 +32,16 @@
             font-size: 1.5em;
             text-align: right;
             color: #2085bc;
-            background: url('static/ai2-logo-header.png');
             background-repeat: no-repeat;
+
+            background-image: url('static/ai2-logo-header.png');
             background-size: 360px 71px;
+
+            @media(max-width: 500px) {
+                background-image: url('static/ai2-logo-header-crop.png');
+                background-size: 89px 71px;
+            }
+
             height: 71px;
             line-height: 71px;
             padding: 5px;
@@ -57,8 +65,17 @@
             padding: 10px;
             min-width: 150px;
             max-width: 250px;
-            flex-basis: auto; /* default value */
-            flex-grow: 1;
+
+            @media(max-width 500px) {
+                min-width: 50%;
+                max-width: 50%;
+                width: 50%;
+            }
+
+            @media(min-width 500px) {
+                flex-basis: auto; /* default value */
+                flex-grow: 1;
+            }
         `
 
         const TextInputWrapper = styled.div`
